@@ -1,0 +1,38 @@
+const locales = {
+  en: {
+    formatLabel: "Link format",
+    copyLabel: "What to copy",
+    markdown: "Markdown",
+    slack: "Slack",
+    plain: "Plain",
+    html: "HTML",
+    onlyTask: "Only Task ID",
+    full: "Task ID + Summary",
+    copied: "Copied: ",
+    copyError: "Copy failed"
+  },
+  fr: {
+    formatLabel: "Format du lien",
+    copyLabel: "Que copier",
+    markdown: "Markdown",
+    slack: "Slack",
+    plain: "Texte simple",
+    html: "HTML",
+    onlyTask: "Seulement l'ID",
+    full: "ID + résumé",
+    copied: "Copié : ",
+    copyError: "Échec de la copie"
+  },
+  ru: {
+    formatLabel: "Формат ссылки",
+    copyLabel: "Что копировать",
+    markdown: "Markdown",
+    slack: "Slack",
+    plain: "Простой текст",
+    html: "HTML",
+    onlyTask: "Только Task ID",
+    full: "Task ID + Summary",
+    copied: "Скопировано: ",
+    copyError: "Ошибка копирования"
+  }
+};

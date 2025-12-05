@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Node modules (if you add build tools later)
+node_modules/
+
+# Extension packages
+*.crx
+*.pem
+*.zip
