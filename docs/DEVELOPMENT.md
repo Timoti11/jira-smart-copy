@@ -36,9 +36,11 @@ jsc-{number}-{brief-description}
 
 ## Development Process
 
+> **⚠️ IMPORTANT**: Always start work by running `./scripts/start-work.sh`. Never create branches or PRs manually.
+
 ### 1. Start Working
 
-Use the script to automatically create a draft PR and branch:
+**ALWAYS** use the script to automatically create a draft PR and branch:
 
 ```bash
 ./scripts/start-work.sh "Brief description of the work"
@@ -140,7 +142,7 @@ It's recommended to set up main branch protection in GitHub:
 ## Quick Commands
 
 ```bash
-# Start new work (creates draft PR + branch)
+# ⚠️ ALWAYS start new work with this command (creates draft PR + branch)
 ./scripts/start-work.sh "Description of work"
 
 # Mark PR as ready for review
