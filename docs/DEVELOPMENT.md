@@ -1,16 +1,16 @@
-# Workflow разработки
+# Development Workflow
 
-## Именование Issue
+## PR Naming
 
-Используем префикс **JSC** (Jira Smart Copy) для всех issue.
+We use the **JSC** prefix (Jira Smart Copy) for all PRs.
 
-### Формат
+### Format
 
 ```
-JSC-{номер}: {Краткое описание}
+JSC-{number}: {Brief description}
 ```
 
-### Примеры
+### Examples
 
 - `JSC-1: Add dark mode support`
 - `JSC-2: Implement keyboard shortcuts`
@@ -18,15 +18,15 @@ JSC-{номер}: {Краткое описание}
 - `JSC-4: Add support for multiple Jira instances`
 - `JSC-5: Improve toast notification styling`
 
-## Именование веток
+## Branch Naming
 
-### Формат
+### Format
 
 ```
-jsc-{номер}-{краткое-описание}
+jsc-{number}-{brief-description}
 ```
 
-### Примеры
+### Examples
 
 - `jsc-1-dark-mode-support`
 - `jsc-2-keyboard-shortcuts`
@@ -34,124 +34,124 @@ jsc-{номер}-{краткое-описание}
 - `jsc-4-multiple-jira-instances`
 - `jsc-5-improve-toast-styling`
 
-## Процесс разработки
+## Development Process
 
-### 1. Начало работы
+### 1. Start Working
 
-Используйте скрипт для автоматического создания draft PR и ветки:
+Use the script to automatically create a draft PR and branch:
 
 ```bash
 ./scripts/start-work.sh "Brief description of the work"
 ```
 
-Скрипт автоматически:
-- ✅ Обновит main ветку
-- ✅ Определит следующий доступный JSC номер (на основе PR)
-- ✅ Создаст ветку с правильным именем `jsc-N-description`
-- ✅ Создаст пустой коммит для инициализации
-- ✅ Создаст **draft PR** (номер PR = номер JSC)
-- ✅ Переключится на новую ветку
+The script automatically:
+- ✅ Updates the main branch
+- ✅ Determines the next available JSC number (based on PRs)
+- ✅ Creates a branch with the correct name `jsc-N-description`
+- ✅ Creates an empty commit for initialization
+- ✅ Creates a **draft PR** (PR number = JSC number)
+- ✅ Switches to the new branch
 
-**Пример:**
+**Example:**
 ```bash
 ./scripts/start-work.sh "Add dark mode support"
-# Создаст: draft PR #9, ветку jsc-9-add-dark-mode-support
+# Creates: draft PR #9, branch jsc-9-add-dark-mode-support
 ```
 
-**Важно:** Теперь issue не создаются отдельно - draft PR выполняет их функцию. Это гарантирует, что номер JSC = номер PR.
+**Important:** Issues are no longer created separately - draft PRs serve their function. This ensures that JSC number = PR number.
 
-### 2. Разработка
+### 2. Development
 
-1. Делайте коммиты с понятными сообщениями
-2. Используйте conventional commits:
-   - `feat:` - новая функциональность
-   - `fix:` - исправление бага
-   - `docs:` - изменения в документации
-   - `refactor:` - рефакторинг кода
-   - `test:` - добавление тестов
-   - `chore:` - технические изменения
+1. Make commits with clear messages
+2. Use conventional commits:
+   - `feat:` - new functionality
+   - `fix:` - bug fix
+   - `docs:` - documentation changes
+   - `refactor:` - code refactoring
+   - `test:` - adding tests
+   - `chore:` - technical changes
 
-**Примеры коммитов:**
+**Commit examples:**
 ```bash
 git commit -m "feat(jsc-1): add dark mode toggle in popup"
 git commit -m "fix(jsc-3): correct HTML formatting in Firefox"
 git commit -m "docs(jsc-1): update README with dark mode info"
 ```
 
-### 4. Завершение работы
+### 3. Finishing Work
 
-Когда работа готова, пометьте PR как ready for review:
+When the work is ready, mark the PR as ready for review:
 
 ```bash
 gh pr ready
 ```
 
-Или через веб-интерфейс GitHub.
+Or through the GitHub web interface.
 
-### 5. Мерж
+### 4. Merge
 
-1. После ревью смержите PR в main
-2. Удалите ветку после мержа
-3. Закройте связанный issue
+1. After review, merge the PR into main
+2. Delete the branch after merging
+3. The PR will be automatically closed
 
-## Релизы
+## Releases
 
-### Создание релиза
+### Creating a Release
 
 ```bash
-# После мержа всех нужных фич в main
+# After merging all needed features into main
 git checkout main
 git pull origin main
 
-# Создайте и запушьте тег
-git tag v{версия}
-git push origin v{версия}
+# Create and push a tag
+git tag v{version}
+git push origin v{version}
 ```
 
-Это автоматически запустит workflow для создания релиза.
+This will automatically trigger the workflow to create a release.
 
-## Номерация версий
+## Version Numbering
 
-Используем [Semantic Versioning](https://semver.org/):
+We use [Semantic Versioning](https://semver.org/):
 
 - **MAJOR** (1.0.0 → 2.0.0): breaking changes
-- **MINOR** (1.0.0 → 1.1.0): новая функциональность (обратно совместимая)
-- **PATCH** (1.0.0 → 1.0.1): исправление багов
+- **MINOR** (1.0.0 → 1.1.0): new functionality (backwards compatible)
+- **PATCH** (1.0.0 → 1.0.1): bug fixes
 
-### Примеры
+### Examples
 
-- `v1.4.1` - исправление бага
-- `v1.5.0` - добавление dark mode
-- `v2.0.0` - переход на Manifest V3 (breaking change)
+- `v1.4.1` - bug fix
+- `v1.5.0` - adding dark mode
+- `v2.0.0` - migration to Manifest V3 (breaking change)
 
-## Защита ветки main
+## Main Branch Protection
 
-Рекомендуется настроить защиту ветки main в GitHub:
+It's recommended to set up main branch protection in GitHub:
 
 1. Settings → Branches → Add rule
 2. Branch name pattern: `main`
-3. Включить:
+3. Enable:
    - ✅ Require pull request before merging
-   - ✅ Require approvals (если работаете в команде)
+   - ✅ Require approvals (if working in a team)
    - ✅ Dismiss stale pull request approvals when new commits are pushed
    - ✅ Require linear history
-   - ✅ Include administrators (опционально)
+   - ✅ Include administrators (optional)
 
-## Быстрые команды
+## Quick Commands
 
 ```bash
-# Начать новую работу (создаёт draft PR + ветку)
+# Start new work (creates draft PR + branch)
 ./scripts/start-work.sh "Description of work"
 
-# Пометить PR как готовый к ревью
+# Mark PR as ready for review
 gh pr ready
 
-# Обновить ветку из main
+# Update branch from main
 git checkout main && git pull && git checkout jsc-{N}-{description} && git merge main
 
-# Удалить локальную ветку после мержа
+# Delete local branch after merge
 git branch -d jsc-{N}-{description}
 
-# Удалить удалённую ветку после мержа
+# Delete remote branch after merge
 git push origin --delete jsc-{N}-{description}
 ```
